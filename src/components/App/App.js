@@ -6,9 +6,12 @@ import { Container, TitleForm, TitleContacts } from './App.styled';
 import shortid from 'shortid';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(window.localStorage.getItem('contacts') ?? [])
-  );
+  const [contacts, setContacts] = useState(() => {
+    if (window.localStorage.getItem('contacts')) {
+      return JSON.parse(window.localStorage.getItem('contacts'));
+    }
+    return [];
+  });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
